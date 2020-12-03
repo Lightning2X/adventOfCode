@@ -5,17 +5,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Day1
+namespace Lightning2x.AdventOfCode2020
 {
-    class Program
+    public class Day1 : IDay
     {
-        static void Main(string[] args)
+        public void Run(string path)
         {
             List<int> numberList = new List<int>();
             List<string> fileLines = new List<string>();
-
-            // Read the file.
-            string path = "in.txt";
             StreamReader fileReader = new StreamReader(path);
             string line = fileReader.ReadLine();
             while (line != null)
@@ -26,7 +23,6 @@ namespace Day1
             List<int> sortedList = MergeSort(numberList);
             Console.WriteLine("The product of the two numbers that sum to 2020 is: " + (SumTwenty(sortedList).ToString()));
             Console.WriteLine("The product of the three numbers that sum to 2020 is: " + (ThreeSum(sortedList).ToString()));
-            Console.ReadLine();
         }
 
 

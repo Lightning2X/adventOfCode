@@ -6,17 +6,14 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace Day2
+namespace Lightning2x.AdventOfCode2020
 {
-    class Program
+    public class Day2 : IDay
     {
-        static void Main(string[] args)
+        public void Run(string path)
         {
             List<Password> passwords = new List<Password>();
             List<string> fileLines = new List<string>();
-
-            // Read the file.
-            string path = "in.txt";
             StreamReader fileReader = new StreamReader(path);
             string line = fileReader.ReadLine();
             while (line != null)
@@ -35,7 +32,7 @@ namespace Day2
                     validPasswords++;
             Console.WriteLine("Amount of valid passwords according to the NEW Policy: {0}", validPasswords);
         }
-        public class Password
+        private class Password
         {
             private int min;
             private int max;
