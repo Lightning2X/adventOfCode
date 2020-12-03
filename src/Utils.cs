@@ -11,7 +11,6 @@ namespace Lightning2x.AdventOfCode2020
         {
             
             List<T> parseList = new List<T>();
-            List<string> fileLines = new List<string>();
             StreamReader fileReader = new StreamReader(path);
             string line = fileReader.ReadLine();
             while (line != null)
@@ -19,8 +18,22 @@ namespace Lightning2x.AdventOfCode2020
                 parseList.Add(parser(line));
                 line = fileReader.ReadLine();
             }
-
+            fileReader.Close();
             return parseList;
+        }
+
+        public static List<string> ReadFile(string path)
+        {
+            List<string> fileLines = new List<string>();
+            StreamReader fileReader = new StreamReader(path);
+            string line = fileReader.ReadLine();
+            while (line != null)
+            {
+                fileLines.Add(line);
+                line = fileReader.ReadLine();
+            }
+            fileReader.Close();
+            return fileLines;
         }
     }
 }
