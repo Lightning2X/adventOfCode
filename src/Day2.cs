@@ -13,14 +13,7 @@ namespace Lightning2x.AdventOfCode2020
         public void Run(string path)
         {
             List<Password> passwords = new List<Password>();
-            List<string> fileLines = new List<string>();
-            StreamReader fileReader = new StreamReader(path);
-            string line = fileReader.ReadLine();
-            while (line != null)
-            {
-                passwords.Add(Password.Parse(line));
-                line = fileReader.ReadLine();
-            }
+            passwords = Utils.TypeParser(passwords, path, Password.Parse);
             int validPasswords = 0;
             for (int i = 0; i < passwords.Count; i++)
                 if (passwords[i].IsValidOldPolicy)

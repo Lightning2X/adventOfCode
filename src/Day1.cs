@@ -12,14 +12,7 @@ namespace Lightning2x.AdventOfCode2020
         public void Run(string path)
         {
             List<int> numberList = new List<int>();
-            List<string> fileLines = new List<string>();
-            StreamReader fileReader = new StreamReader(path);
-            string line = fileReader.ReadLine();
-            while (line != null)
-            {
-                numberList.Add(int.Parse(line));
-                line = fileReader.ReadLine();
-            }
+            numberList = Utils.TypeParser(numberList, path, int.Parse);
             List<int> sortedList = MergeSort(numberList);
             Console.WriteLine("The product of the two numbers that sum to 2020 is: " + (SumTwenty(sortedList).ToString()));
             Console.WriteLine("The product of the three numbers that sum to 2020 is: " + (ThreeSum(sortedList).ToString()));
