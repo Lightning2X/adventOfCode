@@ -14,16 +14,16 @@ namespace Lightning2x.AdventOfCode2020
         {
             List<Password> passwords = new List<Password>();
             passwords = Utils.TypeParser(passwords, path, Password.Parse);
-            int validPasswords = 0;
+            int validOldPasswords = 0, validNewPasswords = 0;
             for (int i = 0; i < passwords.Count; i++)
+            {
                 if (passwords[i].IsValidOldPolicy)
-                    validPasswords++;
-            Console.WriteLine("Amount of valid passwords according to the Old Policy: {0}", validPasswords);
-            validPasswords = 0;
-            for (int i = 0; i < passwords.Count; i++)
+                    validOldPasswords++;
                 if (passwords[i].IsValidNewPolicy)
-                    validPasswords++;
-            Console.WriteLine("Amount of valid passwords according to the NEW Policy: {0}", validPasswords);
+                    validNewPasswords++;
+            }
+            Console.WriteLine($"Amount of valid passwords according to the Old Policy: {validOldPasswords}");
+            Console.WriteLine($"Amount of valid passwords according to the NEW Policy: {validNewPasswords}");
         }
         private class Password
         {
