@@ -24,12 +24,13 @@ namespace Day1
                 line = fileReader.ReadLine();
             }
             List<int> sortedList = MergeSort(numberList);
-            Console.WriteLine(ThreeSum(sortedList).ToString());
+            Console.WriteLine("The product of the two numbers that sum to 2020 is: " + (SumTwenty(sortedList).ToString()));
+            Console.WriteLine("The product of the three numbers that sum to 2020 is: " + (ThreeSum(sortedList).ToString()));
             Console.ReadLine();
         }
 
 
-        private static int ThreeSum(List<int> ls)
+        private static int SumTwenty(List<int> ls)
         {
             for(int i = 0; i < ls.Count; i++)
             {
@@ -37,6 +38,26 @@ namespace Day1
                 if(ls.BinarySearch(target) > 0)
                 {
                     return target * ls[i];
+                }
+
+            }
+            throw new ArgumentNullException("no three sum found.");
+        }
+
+        // Binary search approach
+        private static int ThreeSum(List<int> ls)
+        {
+            for (int i = 0; i < ls.Count; i++)
+            {
+                int target = 2020 - ls[i] - ls[i+1];
+                // Early quit as there is no solution
+                if(target < 0)
+                {
+                    break;
+                }
+                if (ls.BinarySearch(target) > 0)
+                {
+                    return target * ls[i] * ls[i+1];
                 }
 
             }
