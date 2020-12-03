@@ -41,7 +41,7 @@ namespace Day1
                 }
 
             }
-            throw new ArgumentNullException("no three sum found.");
+            throw new ArgumentNullException("No two numbers sum to 2020.");
         }
 
         // Binary search approach
@@ -61,7 +61,7 @@ namespace Day1
                 }
 
             }
-            throw new ArgumentNullException("no three sum found.");
+            throw new ArgumentNullException("No three numbers sum to 2020. (part 2 failed)");
         }
 
         private static List<int> MergeSort(List<int> l)
