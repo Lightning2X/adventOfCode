@@ -11,7 +11,7 @@ namespace Lightning2x.AdventOfCode2020
             Console.WriteLine("Please select day. Type a for all days.");
             string input = Console.ReadLine();
             // Find all types that implement the interface IDay in the current Assembly.
-            Type[] iDayTypes = (from t in Assembly.Load("AdventOfCode2020").GetExportedTypes()
+            Type[] iDayTypes = (from t in Assembly.Load("Lightning2x.AdventOfCode2020").GetExportedTypes()
                                 where !t.IsInterface && !t.IsAbstract
                                 where typeof(IDay).IsAssignableFrom(t)
                                 select t).ToArray();

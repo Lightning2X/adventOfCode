@@ -2,7 +2,9 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
+    <RootNamespace>Lightning2x.AdventOfCode2020</RootNamespace>
+    <AssemblyName>Lightning2x.AdventOfCode2020</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
