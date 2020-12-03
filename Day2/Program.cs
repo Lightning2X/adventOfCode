@@ -26,9 +26,14 @@ namespace Day2
             }
             int validPasswords = 0;
             for (int i = 0; i < passwords.Count; i++)
-                if (passwords[i].IsValid)
+                if (passwords[i].IsValidOldPolicy)
                     validPasswords++;
-            Console.WriteLine("Amount of valid passwords: {0}", validPasswords);
+            Console.WriteLine("Amount of valid passwords according to the Old Policy: {0}", validPasswords);
+            validPasswords = 0;
+            for (int i = 0; i < passwords.Count; i++)
+                if (passwords[i].IsValidNewPolicy)
+                    validPasswords++;
+            Console.WriteLine("Amount of valid passwords according to the NEW Policy: {0}", validPasswords);
         }
         public class Password
         {
@@ -44,7 +49,7 @@ namespace Day2
                 password = _password;
             }
 
-            public bool IsValid
+            public bool IsValidOldPolicy
             {
                 get
                 {
@@ -52,6 +57,9 @@ namespace Day2
                     return constraintCount >= min && constraintCount <= max;
                 }
             }
+
+            public bool IsValidNewPolicy => password[min - 1] == constraint ^ password[max - 1] == constraint;
+            
             public static Password Parse(string input)
             {
                 if (String.IsNullOrWhiteSpace(input)) throw new ArgumentException(input);
