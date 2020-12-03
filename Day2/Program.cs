@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Day2
@@ -23,15 +24,18 @@ namespace Day2
                 passwords.Add(Password.Parse(line));
                 line = fileReader.ReadLine();
             }
-            Console.ReadLine();
+            int validPasswords = 0;
+            for (int i = 0; i < passwords.Count; i++)
+                if (passwords[i].IsValid)
+                    validPasswords++;
+            Console.WriteLine("Amount of valid passwords: {0}", validPasswords);
         }
-
         public class Password
         {
-            public int min;
-            public int max; 
-            public char constraint;
-            public string password;
+            private int min;
+            private int max;
+            private char constraint;
+            private string password;
             public Password(int _min, int _max, char _constraint, string _password)
             {
                 min = _min;
@@ -40,6 +44,14 @@ namespace Day2
                 password = _password;
             }
 
+            public bool IsValid
+            {
+                get
+                {
+                    int constraintCount = Regex.Matches(password, constraint.ToString()).Count;
+                    return constraintCount >= min && constraintCount <= max;
+                }
+            }
             public static Password Parse(string input)
             {
                 if (String.IsNullOrWhiteSpace(input)) throw new ArgumentException(input);
