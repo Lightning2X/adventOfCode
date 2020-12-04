@@ -11,23 +11,9 @@ namespace Lightning2x.AdventOfCode2020
         public void Run(string path)
         {
             List<string> fileLines = Utils.ReadFile(path);
-            List<string> passportStrings = new List<string>();
-            int startIndex = 0;
-            for(int i = 0; i < fileLines.Count; i++)
-            {
-                if(String.IsNullOrEmpty(fileLines[i])) 
-                {
-                    string passportString = fileLines[startIndex];
-                    for(int j = startIndex + 1; j < i; j++)
-                    {
-                        passportString += " " + fileLines[j];
-                    }
-                    passportStrings.Add(passportString);
-                    if(i < fileLines.Count - 1)
-                        startIndex = i + 1;
-                }
-            }
+            List<string> passportStrings = FormatPasswords(fileLines);
             List<Passport> passports = Utils.TypeParser(passportStrings, Passport.Parse);
+
             int passportsValidKeys = 0;
             int passportsValid = 0;
             foreach (Passport p in passports)
@@ -41,6 +27,26 @@ namespace Lightning2x.AdventOfCode2020
             Console.WriteLine($"The amount of valid passports for part 2 is {passportsValid}");
         }
 
+        private List<string> FormatPasswords(List<string> fileLines)
+        {
+            List<string> passportStrings = new List<string>();
+            int startIndex = 0;
+            for (int i = 0; i < fileLines.Count; i++)
+            {
+                if (String.IsNullOrEmpty(fileLines[i]))
+                {
+                    string passportString = fileLines[startIndex];
+                    for (int j = startIndex + 1; j < i; j++)
+                    {
+                        passportString += " " + fileLines[j];
+                    }
+                    passportStrings.Add(passportString);
+                    if (i < fileLines.Count - 1)
+                        startIndex = i + 1;
+                }
+            }
+            return passportStrings;
+        }
         private class Passport
         {
             private Dictionary<string, string> passportFields;
@@ -103,7 +109,6 @@ namespace Lightning2x.AdventOfCode2020
             private bool PassportIdValid => passportFields["pid"].Length == 9 && int.TryParse(passportFields["pid"], out _);
             public static Passport Parse(string input)
             {
-                //if (String.IsNullOrWhiteSpace(input)) throw new ArgumentException(input);
                 Passport passport = new Passport();
                 try
                 {
@@ -113,10 +118,8 @@ namespace Lightning2x.AdventOfCode2020
                 }
                 catch
                 {
-                    throw new ArgumentException("invalid password specs");
+                    throw new ArgumentException("invalid passport specs");
                 }
-                // Parse the string and populate the MyClass instance
-
                 return passport;
             }
         }
