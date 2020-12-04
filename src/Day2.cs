@@ -13,7 +13,7 @@ namespace Lightning2x.AdventOfCode2020
         public void Run(string path)
         {
             List<Password> passwords = new List<Password>();
-            passwords = Utils.TypeParser(passwords, path, Password.Parse);
+            passwords = Utils.TypeParser(path, Password.Parse);
             int validOldPasswords = 0, validNewPasswords = 0;
             for (int i = 0; i < passwords.Count; i++)
             {

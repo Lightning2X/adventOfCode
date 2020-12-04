@@ -7,7 +7,7 @@ namespace Lightning2x.AdventOfCode2020
 { 
     public static class Utils
     {
-        public static List<T> TypeParser<T> (List<T> ls, string path, Func<string, T> parser)
+        public static List<T> TypeParser<T> (string path, Func<string, T> parser)
         {
             
             List<T> parseList = new List<T>();
@@ -19,6 +19,17 @@ namespace Lightning2x.AdventOfCode2020
                 line = fileReader.ReadLine();
             }
             fileReader.Close();
+            return parseList;
+        }
+
+        public static List<T> TypeParser<T>(List<string> parseablelist, Func<string, T> parser)
+        {
+
+            List<T> parseList = new List<T>();
+            for (int i = 0; i < parseablelist.Count; i++)
+            {
+                parseList.Add(parser(parseablelist[i]));
+            }
             return parseList;
         }
 
