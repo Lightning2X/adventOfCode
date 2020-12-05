@@ -10,20 +10,29 @@ namespace Lightning2x.AdventOfCode2020
     {
         public void Run(string path)
         {
-            BoardingPass test = BoardingPass.Parse("BBBBBBBRRR");
             List<BoardingPass> boardingPasses = Utils.TypeParser(path, BoardingPass.Parse);
             int maxSeatId = 0;
             foreach (BoardingPass b in boardingPasses)
                 if (b.SeatID > maxSeatId)
                     maxSeatId = b.SeatID;
-
+            
             Console.WriteLine($"The highest seatID is {maxSeatId}");
+            Console.WriteLine("My seatID is " + FindSeatId(boardingPasses));
+
         }
 
-        private class BoardingPass
+        private int FindSeatId(List<BoardingPass> boardingPasses)
+        {
+            List<int> boardingPassesIDs = boardingPasses.Select(x => x.SeatID).ToList();
+            boardingPassesIDs.Sort();
+            boardingPasses.Sort();
+            List<int> allSeatIDs = Enumerable.Range(boardingPassesIDs.First(), boardingPassesIDs.Last() - boardingPassesIDs.First()).ToList();
+            return allSeatIDs.Except(boardingPassesIDs).First();
+        }
+        private class BoardingPass : IComparable
         {
             private int row, column;
-            private const int maxColumn = 7, maxRow = 127;
+            public const int maxColumn = 8, maxRow = 128;
             public BoardingPass(int _row, int _column)
             {
                 row = _row;
@@ -53,18 +62,20 @@ namespace Lightning2x.AdventOfCode2020
             {
 
                 int upper = maxRange, lower = 0;
-                for (int i = 0; i < input.Length - 1; i++)
+                for (int i = 0; i < input.Length; i++)
                 {
                     if (input[i] == lowerRange)
-                        upper -= ((upper - lower) / 2);
+                        upper -= (upper - lower) / 2;
                     else if (input[i] == upperRange)
-                        lower += (((upper - lower) + 1)/ 2);
+                        lower += (upper - lower) / 2;
                 }
-                if (input[input.Length -1] == upperRange)
-                    return upper;
-                else
-                    return lower;
+                return lower;
              
+            }
+
+            public int CompareTo(object obj)
+            {
+                return this.SeatID - ((BoardingPass)obj).SeatID;
             }
         }
     }
