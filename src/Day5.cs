@@ -10,6 +10,7 @@ namespace Lightning2x.AdventOfCode2020
     {
         public void Run(string path)
         {
+            BoardingPass test = BoardingPass.Parse("BBBBBBBRRR");
             List<BoardingPass> boardingPasses = Utils.TypeParser(path, BoardingPass.Parse);
             int maxSeatId = 0;
             foreach (BoardingPass b in boardingPasses)
@@ -22,7 +23,7 @@ namespace Lightning2x.AdventOfCode2020
         private class BoardingPass
         {
             private int row, column;
-            private const int maxColumn = 7, maxRow = 128;
+            private const int maxColumn = 7, maxRow = 127;
             public BoardingPass(int _row, int _column)
             {
                 row = _row;
@@ -52,12 +53,12 @@ namespace Lightning2x.AdventOfCode2020
             {
 
                 int upper = maxRange, lower = 0;
-                for (int i = 0; i < input.Length; i++)
+                for (int i = 0; i < input.Length - 1; i++)
                 {
                     if (input[i] == lowerRange)
                         upper -= ((upper - lower) / 2);
                     else if (input[i] == upperRange)
-                        lower += ((upper - lower) / 2);
+                        lower += (((upper - lower) + 1)/ 2);
                 }
                 if (input[input.Length -1] == upperRange)
                     return upper;
