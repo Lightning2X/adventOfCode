@@ -25,7 +25,6 @@ namespace Lightning2x.AdventOfCode2020
         {
             List<int> boardingPassesIDs = boardingPasses.Select(x => x.SeatID).ToList();
             boardingPassesIDs.Sort();
-            boardingPasses.Sort();
             List<int> allSeatIDs = Enumerable.Range(boardingPassesIDs.First(), boardingPassesIDs.Last() - boardingPassesIDs.First()).ToList();
             return allSeatIDs.Except(boardingPassesIDs).First();
         }
