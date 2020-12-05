@@ -67,7 +67,6 @@ namespace Lightning2x.AdventOfCode2020
                 {
                     throw new ArgumentException("invalid password specs");
                 }
-                // Parse the string and populate the MyClass instance
 
                 return password;
             }
