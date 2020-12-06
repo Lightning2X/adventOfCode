@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using NUnit.Framework;
 
 namespace Lightning2x.AdventOfCode2020
 {
@@ -24,6 +24,8 @@ namespace Lightning2x.AdventOfCode2020
             {
                 part2Result *= TreeSlopes(grid, wrap, s.Item1, s.Item2);
             }
+            Assert.IsTrue(TreeSlopes(grid, wrap, 3, 1) == 225);
+            Assert.IsTrue(part2Result == 1115775000);
             Console.WriteLine("Total Amount of trees for Part 1 is: " + TreeSlopes(grid, wrap, 3, 1));
             Console.WriteLine($"Total Amount of trees for Part 2 is: {part2Result}");
         }

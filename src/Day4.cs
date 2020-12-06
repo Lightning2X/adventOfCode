@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using NUnit.Framework;
 
 namespace Lightning2x.AdventOfCode2020
 {
@@ -23,6 +22,9 @@ namespace Lightning2x.AdventOfCode2020
                 if (p.IsValidPassport)
                     passportsValid++;
             }
+
+            Assert.IsTrue(passportsValidKeys == 190);
+            Assert.IsTrue(passportsValid == 121);
             Console.WriteLine($"The amount of valid passports for part 1 is {passportsValidKeys}");
             Console.WriteLine($"The amount of valid passports for part 2 is {passportsValid}");
         }

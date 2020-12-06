@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using NUnit.Framework;
 
 namespace Lightning2x.AdventOfCode2020
 {
@@ -32,6 +31,8 @@ namespace Lightning2x.AdventOfCode2020
                 distinctSum += g.Distinct;
                 intersectSum += g.Intersection;
             }
+            Assert.IsTrue(distinctSum == 6748);
+            Assert.IsTrue(intersectSum == 3445);
             Console.WriteLine($"The sum of distinct answers per group (Part 1) is {distinctSum}");
             Console.WriteLine($"The sum of union answers per group (Part 2) is {intersectSum}");
         }
