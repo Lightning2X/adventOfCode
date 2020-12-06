@@ -7,6 +7,7 @@ namespace Lightning2x.AdventOfCode2020
 { 
     public static class Utils
     {
+        public static bool NUnitEnabled;
         public static List<T> TypeParser<T> (string path, Func<string, T> parser)
         {
             

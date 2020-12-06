@@ -22,9 +22,11 @@ namespace Lightning2x.AdventOfCode2020
                 if (p.IsValidPassport)
                     passportsValid++;
             }
-
-            Assert.IsTrue(passportsValidKeys == 190);
-            Assert.IsTrue(passportsValid == 121);
+            if(Utils.NUnitEnabled)
+            {
+                Assert.IsTrue(passportsValidKeys == 190);
+                Assert.IsTrue(passportsValid == 121);
+            }
             Console.WriteLine($"The amount of valid passports for part 1 is {passportsValidKeys}");
             Console.WriteLine($"The amount of valid passports for part 2 is {passportsValid}");
         }

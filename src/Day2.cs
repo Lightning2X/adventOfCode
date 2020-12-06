@@ -19,8 +19,11 @@ namespace Lightning2x.AdventOfCode2020
                 if (passwords[i].IsValidNewPolicy)
                     validNewPasswords++;
             }
-            Assert.IsTrue(validOldPasswords == 625);
-            Assert.IsTrue(validNewPasswords == 391);
+            if(Utils.NUnitEnabled)
+            {
+                Assert.IsTrue(validOldPasswords == 625);
+                Assert.IsTrue(validNewPasswords == 391);
+            }
             Console.WriteLine($"Amount of valid passwords according to the Old Policy: {validOldPasswords}");
             Console.WriteLine($"Amount of valid passwords according to the NEW Policy: {validNewPasswords}");
         }

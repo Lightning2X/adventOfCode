@@ -10,8 +10,11 @@ namespace Lightning2x.AdventOfCode2020
         {
             List<int> numberList = Utils.TypeParser(path, int.Parse);
             List<int> sortedList = MergeSort(numberList);
-            Assert.IsTrue(SumTwenty(sortedList) == 1018336);
-            Assert.IsTrue(ThreeSum(sortedList) == 288756720);
+            if(Utils.NUnitEnabled)
+            {
+                Assert.IsTrue(SumTwenty(sortedList) == 1018336);
+                Assert.IsTrue(ThreeSum(sortedList) == 288756720);
+            }
             Console.WriteLine("The product of the two numbers that sum to 2020 is: " + (SumTwenty(sortedList).ToString()));
             Console.WriteLine("The product of the three numbers that sum to 2020 is: " + (ThreeSum(sortedList).ToString()));
         }

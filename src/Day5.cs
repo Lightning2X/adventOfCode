@@ -14,8 +14,11 @@ namespace Lightning2x.AdventOfCode2020
             foreach (BoardingPass b in boardingPasses)
                 if (b.SeatID > maxSeatId)
                     maxSeatId = b.SeatID;
-            Assert.IsTrue(maxSeatId == 871);
-            Assert.IsTrue(FindSeatId(boardingPasses) == 640);
+            if(Utils.NUnitEnabled)
+            {
+                Assert.IsTrue(maxSeatId == 871);
+                Assert.IsTrue(FindSeatId(boardingPasses) == 640);
+            }
             Console.WriteLine($"The highest seatID is {maxSeatId}");
             Console.WriteLine("My seatID is " + FindSeatId(boardingPasses));
 
