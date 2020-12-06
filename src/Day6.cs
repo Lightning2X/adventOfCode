@@ -26,36 +26,42 @@ namespace Lightning2x.AdventOfCode2020
                     tempList.Add(fileLines[i]);
             }
             List<Group> groupList = Utils.TypeParser(parseList, Group.Parse);
-            int distinctSum = 0, unionSum = 0;
+            int distinctSum = 0, intersectSum = 0;
             foreach(Group g in groupList)
             {
                 distinctSum += g.Distinct;
-                unionSum += g.Union;
+                intersectSum += g.Intersection;
             }
             Console.WriteLine($"The sum of distinct answers per group (Part 1) is {distinctSum}");
-            Console.WriteLine($"The sum of union answers per group (Part 2) is {unionSum}");
+            Console.WriteLine($"The sum of union answers per group (Part 2) is {intersectSum}");
         }
 
         public class Group
         {
             private string distinctAnswers;
-            private string unionAnswers;
-            public Group(string _distinctAnswers, string _unionAnswers)
+            private string intersectionAnswers;
+            public Group(string _distinctAnswers, string _intersectionAnswers)
             {
                 distinctAnswers = _distinctAnswers;
-                unionAnswers = _unionAnswers;
+                intersectionAnswers = _intersectionAnswers;
             }
 
             public int Distinct => distinctAnswers.Length;
-            public int Union => unionAnswers.Length;
+            public int Intersection => intersectionAnswers.Length;
 
             public static Group Parse(string input)
             {
                 Group group = null;
                 try
                 {
+                    string[] groups = input.Split(",");
+                    string intersection = groups[0];
+                    for(int i = 1; i < groups.Length; i++)
+                    {
+                        intersection = new string(intersection.Intersect(groups[i]).ToArray());
+                    }
                     string distinct = new string(input.Replace("," , "").ToCharArray().Distinct().ToArray());
-                    group = new Group(distinct, "");
+                    group = new Group(distinct, intersection);
                 }
                 catch
                 {
