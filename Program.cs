@@ -9,33 +9,39 @@ namespace Lightning2x.AdventOfCode2020
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("------- AOC 2020 Lightning2x -------");
-            Console.WriteLine("this program expects one of the following inputs:");
-            Console.WriteLine("a > runs all days");
-            Console.WriteLine("digit > runs the day specified using default input, and checks Nunit");
-            Console.WriteLine("digit string > runs the day specified using the string as path \n");
-            string input = Console.ReadLine();
-            string[] split = input.Split(" ");
             // Find all types that implement the interface IDay in the current Assembly.
             Type[] iDayTypes = (from t in Assembly.Load("Lightning2x.AdventOfCode2020").GetExportedTypes()
                                 where !t.IsInterface && !t.IsAbstract
                                 where typeof(IDay).IsAssignableFrom(t)
                                 select t).ToArray();
-            if (input == "a")
-            {
+
+            Console.WriteLine("------- AOC 2020 Lightning2x -------");
+            Console.WriteLine("this program expects one of the following inputs:");
+            Console.WriteLine("a > runs all days");
+            Console.WriteLine("digit > runs the day specified using default input, and checks Nunit");
+            Console.WriteLine("digit string > runs the day specified using the string as path \n");
+            if (args.Length > 0 && args[0] == "test")
                 RunAll(iDayTypes);
-            }
-            // Check if it is a number
-            else if (int.TryParse(split[0], out _))
-            {
-                if (split.Length == 1)
-                    RunDay(int.Parse(split[0]), iDayTypes);
+            else {
+                string input = Console.ReadLine();
+                if (input == "a")
+                {
+                    RunAll(iDayTypes);
+                }
+                // Check if it is a number
+                else if (int.TryParse(input.Split(" ")[0], out _))
+                {
+                    string[] split = input.Split(" ");
+                    if (split.Length == 1)
+                        RunDay(int.Parse(split[0]), iDayTypes);
+                    else
+                        RunDay(int.Parse(split[0]), iDayTypes, split[1]);
+                }
                 else
-                    RunDay(int.Parse(split[0]), iDayTypes, split[1]);
-            }
-            else
-            {
-                Console.WriteLine("Invalid input specified.");
+                {
+                    Console.WriteLine("Invalid input specified.");
+                }
+
             }
 
         }
