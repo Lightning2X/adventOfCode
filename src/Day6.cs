@@ -19,38 +19,43 @@ namespace Lightning2x.AdventOfCode2020
             {
                 if (string.IsNullOrEmpty(fileLines[i]))
                 {
-                    Console.WriteLine($"i is {i}");
-                    parseList.Add(string.Join("", tempList));
+                    parseList.Add(string.Join(",", tempList));
                     tempList = new List<string>();
                 }
                 else
                     tempList.Add(fileLines[i]);
             }
             List<Group> groupList = Utils.TypeParser(parseList, Group.Parse);
-            int sumCounts = 0;
-            groupList.ForEach(x => sumCounts += x.AnswerCount);
-            Console.WriteLine($"The sum of the counts is {sumCounts}");
+            int distinctSum = 0, unionSum = 0;
+            foreach(Group g in groupList)
+            {
+                distinctSum += g.Distinct;
+                unionSum += g.Union;
+            }
+            Console.WriteLine($"The sum of distinct answers per group (Part 1) is {distinctSum}");
+            Console.WriteLine($"The sum of union answers per group (Part 2) is {unionSum}");
         }
 
         public class Group
         {
-            private string answers;
-
-            public Group(string _answers)
+            private string distinctAnswers;
+            private string unionAnswers;
+            public Group(string _distinctAnswers, string _unionAnswers)
             {
-                answers = _answers;
+                distinctAnswers = _distinctAnswers;
+                unionAnswers = _unionAnswers;
             }
 
-            public int AnswerCount => answers.Length;
-
-            public string Answers => answers;
+            public int Distinct => distinctAnswers.Length;
+            public int Union => unionAnswers.Length;
 
             public static Group Parse(string input)
             {
                 Group group = null;
                 try
                 {
-                    group = new Group(new string(input.ToCharArray().Distinct().ToArray()));
+                    string distinct = new string(input.Replace("," , "").ToCharArray().Distinct().ToArray());
+                    group = new Group(distinct, "");
                 }
                 catch
                 {
