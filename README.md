@@ -2,7 +2,15 @@
 
 My solutions for AOC2020 written in C#. 
 
-Instructions: 
+## Instructions: 
 - Clone the project
 - cd adventofCode/ && dotnet build && dotnet run
-- type a to run all days with the input in inputs/ or type a number for a specific day. I'm planning to add command line path soon (tm)
+- If using custom input, see below
+
+## Sample inputs:
+- a  
+*Runs all days*
+- 2  
+*Runs day 2. Note that this uses the default inputs in inputs.*
+- 2 ./myfile.txt  
+*Runs day 2 using the input from myfile.txt (Also disables Nunit since it relies on specific inputs).*
